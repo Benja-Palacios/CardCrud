@@ -4,9 +4,10 @@ import com.crud.card.CardCrud.model.Card;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Repository
 public class CardRepository implements ICardRepository{
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -30,13 +31,13 @@ public class CardRepository implements ICardRepository{
 
     @Override
     public int update(Card card) {
-        String SQL = "UPDATE cads SET name =?, number =?, type =?, cvv =? WHERE id_card = ?";
+        String SQL = "UPDATE cards SET name =?, number =?, type =?, cvv =? WHERE id_card = ?";
         return jdbcTemplate.update(SQL, new Object[]{
                 card.getName(),
                 card.getNumber(),
                 card.getType(),
                 card.getCvv(),
-                card.getStatus()
+                card.getId_card()
         });
     }
 
